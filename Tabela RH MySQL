@@ -1,0 +1,26 @@
+create database db_recursoshumanos;
+
+CREATE TABLE colaboradores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    sexo VARCHAR(20),
+    cargo VARCHAR(50),
+    salario DECIMAL(10, 2),
+    departamento VARCHAR(50)
+);
+INSERT INTO colaboradores (nome, sexo, cargo, salario, departamento) 
+VALUES ("Maria","fem", "desenvolvedor", 3.000, "tecnologia");
+INSERT INTO colaboradores (nome, sexo, cargo, salario, departamento) 
+VALUES ("Joao","masc", "estagiário", 1.200, "tecnologia");
+INSERT INTO colaboradores (nome, sexo, cargo, salario, departamento) 
+VALUES ("Ruth","fem", "analista de sistemas", 4.000, "tecnologia");
+INSERT INTO colaboradores (nome, sexo, cargo, salario, departamento) 
+VALUES ("Rosana","fem", "auxiliar", 2.100, "tecnologia");
+INSERT INTO colaboradores (nome, sexo, cargo, salario, departamento) 
+VALUES ("Pedro","masc", "desenvolvedor", 3.000, "tecnologia");
+
+SELECT * FROM colaboradores WHERE salario > 2.000;
+SELECT * FROM colaboradores WHERE salario < 2.000;
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE colaboradores SET salario = 5.000 WHERE nome = "Maria";
