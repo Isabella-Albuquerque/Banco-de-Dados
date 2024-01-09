@@ -1,0 +1,52 @@
+-- criando o banco de dados
+CREATE database db_farmacia;
+
+-- usando o banco de dados
+USE db_farmacia;
+
+-- criando tabelas
+CREATE table tb_categorias (
+ id_categoria INT PRIMARY KEY,
+ nome_categoria VARCHAR(50) NOT NULL,
+ descricao_categoria TEXT
+);
+
+CREATE table tb_produtos (
+ id_produto INT PRIMARY KEY,
+ nome_produto VARCHAR(50) NOT NULL,
+ descricao_produto TEXT,
+ valor_produto DECIMAL(10,2),
+ id_categoria INT,
+ FOREIGN KEY (id_categoria) REFERENCES tb_categorias(id_categoria)
+);
+
+-- inserindo valores nas tabelas tb_categorias e tb_produtos
+INSERT INTO tb_categorias (id_categoria, nome_categoria, descricao_categoria) VALUES
+(1, 'analgésicos', 'medicamentos para alívio de dores variadas'),
+(2, 'anti-inflamatorios', 'medicamentos para combate de inflamação'),
+(3, 'antibióticos', 'medicamentos para tratamento de infecções bacterianas'),
+(4, 'suplementos', 'suplementos alimentares e vitamínicos sem prescrição');
+
+INSERT INTO tb_produtos (id_produto, nome_produto, descricao_produto, valor_produto, id_categoria) VALUES
+(1, 'dipirona', 'alívio da dor e e antitérmico', 4.99, 1),
+(2, 'paracetamol', 'alívio da dor e e antitérmico', 5.99, 1),
+(3, 'amoxicilina', 'infecções nos pulmões, nas amígdalas, nos seios da face, no trato urinário e genital, na pele e nas mucosas', 35.99, 3),
+(4, 'vitamina c', 'suplemento de vitamina c em cápsulas', 8.99, 4),
+(5, 'whey protein', 'suplemento alimentar de proteína do leite', 70.00, 4);
+
+-- selecionando produtos cujo preço é maior que 10 reais
+SELECT * FROM tb_produtos WHERE valor_produto > 10.00;
+
+-- selecionando produtos cujo preço está entre 10 e 50 reais
+SELECT * FROM tb_produtos WHERE valor_produto BETWEEN 10.00 AND 50.00;
+
+-- selecionando produtos cujo nome contém a letra M
+SELECT * FROM tb_produtos WHERE nome_produto LIKE '%M%';
+
+-- selecionando os dados das tabelas tb_produtos e tb_categorias usando INNER JOIN
+SELECT tb_produtos.*, tb_categorias.* FROM tb_produtos INNER JOIN tb_categorias ON tb_produtos.id_categoria = tb_categorias.id_categoria;
+
+-- selecionando dados das tabelas tb_produtos e tb_categorias usando INNER JOIN
+-- apenas produtos que pertencem à categoria "analgésicos"
+SELECT tb_produtos.*, tb_categorias.* FROM tb_produtos INNER JOIN tb_categorias ON tb_produtos.id_categoria = tb_categorias.id_categoria
+WHERE tb_categorias.nome_categoria = 'analgésicos';
