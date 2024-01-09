@@ -1,6 +1,6 @@
 # Banco-de-Dados
 
-Este repositório contém scripts SQL relacionados a um sistema de banco de dados para uma Farmácia, Boteco ou Pizzaria, dependendo do contexto. Os scripts incluem a criação de tabelas, inserção de dados e consultas básicas.
+Este repositório contém scripts SQL relacionados a um sistema de banco de dados dependendo do contexto. Os scripts foram criados ao longo do bootcamp Generation para treinar o uso do MySQL. Os scripts incluem a criação de tabelas, inserção de dados e consultas básicas.
 
 ## Estrutura do Banco de Dados
 
