@@ -1,0 +1,62 @@
+-- criand o banco de dados
+CREATE DATABASE db_pizzaria_legal;
+
+-- usando o banco de dados desejado
+USE db_pizzaria_legal;
+
+-- criando a tabela de categorias
+CREATE TABLE tb_categorias (
+    id_categoria BIGINT PRIMARY KEY,
+    tamanho VARCHAR(50) NOT NULL
+);
+
+-- criando a tabela de pizzas
+CREATE TABLE tb_pizzas (
+    id_pizza BIGINT PRIMARY KEY,
+    sabor VARCHAR(50) NOT NULL,
+    borda VARCHAR(50) NOT NULL,
+    valor DECIMAL(10, 2),
+    id_categoria BIGINT, -- Adicionando a coluna id_categoria
+    FOREIGN KEY (id_categoria) REFERENCES tb_categorias(id_categoria)
+);
+
+-- inserindo dados na tabela de categorias
+INSERT INTO tb_categorias (id_categoria, tamanho)
+VALUES
+(1, 'broto'),
+(2, 'média'),
+(3, 'grande'),
+(4, 'calzone'),
+(5, 'mini pizza');
+
+-- inserindo dados na tabela de pizzas
+INSERT INTO tb_pizzas(id_pizza, sabor, borda, valor, id_categoria) 
+VALUES
+(1, 'mussarela', 'catupiry', 45.00, 1),
+(2, 'mussarela', 'catupiry', 60.00, 2),
+(3, 'mussarela', 'catupiry', 75.00, 3),
+(4, 'mussarela', 'catupiry', 80.00, 4),
+(5, 'mussarela', 'catupiry', 10.00, 5),
+(6, 'frango', 'catupiry', 45.00, 1),
+(7, 'frango', 'catupiry', 60.00, 2),
+(8, 'frango', 'catupiry', 75.00, 3),
+(9, 'frango', 'catupiry', 80.00, 4),
+(10, 'frango', 'catupiry', 10.00, 5);
+
+-- selecionando pizzas com valor maior que 45 reais
+SELECT * FROM tb_pizzas WHERE valor > 45.00;
+
+-- selecionando pizzas  com valor entre 50 e 100 reais
+SELECT * FROM tb_pizzas WHERE valor BETWEEN 50.00 AND 100.00;
+
+-- selecionando pizzas  com a letra m o nome
+SELECT * FROM tb_pizzas WHERE sabor LIKE '%M%';
+
+-- inner join das tabelas tb_pizzas. etb_categorias
+SELECT tb_pizzas.*, tb_categorias.* FROM tb_pizzas INNER JOIN tb_categorias ON tb_pizzas.id_categoria = tb_categorias.id_categoria;
+
+-- inner join com restrição
+SELECT tb_pizzas.*, tb_categorias.*
+FROM tb_pizzas INNER JOIN tb_categorias ON tb_pizzas.id_categoria = tb_categorias.id_categoria
+WHERE tb_categorias.tamanho = 'broto';
+
